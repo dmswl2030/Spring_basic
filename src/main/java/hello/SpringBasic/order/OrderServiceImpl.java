@@ -2,12 +2,18 @@ package hello.SpringBasic.order;
 
 import hello.SpringBasic.discount.DiscountPolicy;
 import hello.SpringBasic.member.Member;
+import hello.SpringBasic.member.MemberRepository;
 import hello.SpringBasic.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-    private DiscountPolicy discountPolicy; //구체에 의존하지 않고 추상화인 인터페이스에만 의존한다
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy; //구체에 의존하지 않고 추상화인 인터페이스에만 의존한다
+    
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    	this.memberRepository = memberRepository;
+    	this.discountPolicy = discountPolicy;
+    }
     
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
