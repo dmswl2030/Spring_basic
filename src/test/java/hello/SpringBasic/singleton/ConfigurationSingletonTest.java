@@ -24,5 +24,13 @@ public class ConfigurationSingletonTest {
 		System.out.println("memberService -> memberRepository1:: " + memberRepository1);
 		System.out.println("orderService -> memberRepository2:: " + memberRepository2);
 	}
+	
+	@Test
+	void configuratiionDeep() {
+		ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+		AppConfig bean = ac.getBean(AppConfig.class);
+		
+		System.out.println("bean:: " + bean.getClass());
+	}
 
 }
